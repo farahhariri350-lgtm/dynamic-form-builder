@@ -3,8 +3,7 @@ html, body, #root, .app-wrapper {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  min-height: 100vh;
+  min-height: 100vh; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
@@ -15,8 +14,8 @@ html, body, #root, .app-wrapper {
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden; 
-}
+  overflow-x: hidden; 
+  padding: 20px 10px; 
 
 
 .magic-layer {
@@ -29,7 +28,6 @@ html, body, #root, .app-wrapper {
   z-index: 1;
 }
 
-
 .bird {
   position: absolute;
   font-size: 30px;
@@ -38,27 +36,27 @@ html, body, #root, .app-wrapper {
 }
 
 @keyframes fly {
-  0% { left: -10%; transform: translateY(0) rotate(5deg); }
+  0% { left: -15%; transform: translateY(0) rotate(5deg); }
   50% { transform: translateY(-30px) rotate(-5deg); }
-  100% { left: 110%; transform: translateY(0) rotate(5deg); }
+  100% { left: 115%; transform: translateY(0) rotate(5deg); }
 }
 
 .cloud {
   position: absolute;
-  font-size: 55px;
+  font-size: clamp(40px, 10vw, 60px); 
   color: white;
   opacity: 0.4;
-  animation: drift 20s linear infinite;
+  animation: drift 25s linear infinite;
 }
 
 @keyframes drift {
-  from { left: -20%; }
-  to { left: 120%; }
+  from { left: -25%; }
+  to { left: 125%; }
 }
 
 .star {
   position: absolute;
-  font-size: 25px;
+  font-size: 20px;
   animation: twinkle 3s infinite ease-in-out;
 }
 
@@ -72,12 +70,12 @@ html, body, #root, .app-wrapper {
   position: relative;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  padding: 40px;
+  padding: clamp(20px, 5vw, 40px); 
   border-radius: 24px;
   box-shadow: 0 15px 35px rgba(244, 114, 182, 0.15);
   border: 1px solid #fce7f3;
-  width: 90%;
-  max-width: 500px;
+  width: 95%; 
+  max-width: 550px; 
   z-index: 10; 
   animation: floatCard 5s ease-in-out infinite;
   text-align: left; 
@@ -88,12 +86,10 @@ html, body, #root, .app-wrapper {
   50% { transform: translateY(-10px); }
 }
 
-
 h1 {
   color: #be185d;
-  font-size: 28px;
-  margin-bottom: 30px;
-  margin-top: 0;
+  font-size: clamp(22px, 6vw, 28px); 
+  margin-bottom: 25px;
   text-align: center;
   font-weight: 700;
 }
@@ -133,20 +129,16 @@ input:focus, select:focus, textarea:focus {
   border-color: #f472b6;
   background-color: #fff;
   box-shadow: 0 0 12px rgba(244, 114, 182, 0.2);
-  transform: translateX(3px);
 }
 
-
 textarea {
-  min-height: 90px;
+  min-height: 100px;
   resize: none;
 }
 
-
 .checkbox-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-start; 
   gap: 12px;
   margin: 20px 0;
   cursor: pointer;
@@ -155,28 +147,27 @@ textarea {
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
+  margin-top: 2px; 
   accent-color: #db2777; 
-  cursor: pointer;
-  margin: 0;
 }
 
 .checkbox-wrapper label {
-  margin-bottom: 0;
   font-weight: 500;
   color: #374151;
   font-size: 14px;
+  line-height: 1.4;
 }
 
 
 .button-group {
   display: flex;
-  flex-direction: column; 
+  flex-direction: row; 
   gap: 12px;
   margin-top: 25px;
 }
 
 .btn-submit {
-  width: 100%;
+  flex: 2; 
   background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
   color: white;
   border: none;
@@ -189,26 +180,38 @@ input[type="checkbox"] {
   box-shadow: 0 4px 15px rgba(219, 39, 119, 0.2);
 }
 
-.btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(219, 39, 119, 0.3);
-}
-
 .btn-reset {
-  width: 100%;
+  flex: 1;
   background-color: #f3f4f6;
   color: #6b7280;
   border: none;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
-.btn-reset:hover {
-  background-color: #e5e7eb;
-  color: #374151;
+
+@media (max-width: 600px) {
+  .app-wrapper {
+    align-items: flex-start; 
+    padding-top: 40px;
+  }
+  
+  .button-group {
+    flex-direction: column; 
+  }
+
+  .btn-submit, .btn-reset {
+    width: 100%;
+    flex: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .bird { font-size: 20px; }
+  .form-container { border-radius: 16px; }
 }
 
 
@@ -229,11 +232,6 @@ input[type="checkbox"] {
   font-size: 12px;
   margin-top: 5px;
   font-weight: 500;
-}
-
-.input-error {
-  border-color: #fecaca !important;
-  background-color: #fef2f2 !important;
 }
 
 @keyframes slideDown {
